@@ -7,13 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Commands" />
       <Folder Include="Queries" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.1.1" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-preview.7.23375.6" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain.Service\Domain.Service.csproj" />
     </ItemGroup>
 
 </Project>
