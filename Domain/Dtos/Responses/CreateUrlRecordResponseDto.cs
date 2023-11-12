@@ -1,6 +1,6 @@
-namespace Application.Commands.CreateUrlRecord.Dtos;
+namespace Domain.Dtos.Responses;
 
-public class CreateUrlRecordCommandResult
+public class CreateUrlRecordResponseDto
 {
     public bool IsExists { get; set; }
     public string ShortLink { get; set; }

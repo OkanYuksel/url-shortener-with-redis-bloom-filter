@@ -1,4 +1,4 @@
-namespace Domain.Service.RepositoryInterfaces;
+namespace Domain.Service.Interfaces.RepositoryInterfaces;
 
 public interface IRedisRepository
 {

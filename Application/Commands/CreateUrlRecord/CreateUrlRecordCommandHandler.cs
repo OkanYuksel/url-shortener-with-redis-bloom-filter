@@ -1,4 +1,5 @@
 using Application.Commands.CreateUrlRecord.Dtos;
+using Domain.Dtos.Requests;
 using Domain.Service.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -23,9 +24,19 @@ public class CreateUrlRecordCommandHandler : IRequestHandler<CreateUrlRecordComm
     {
         _logger.LogInformation("CreateUrlCommand handled.");
 
-        // var result = _domainService.CreateUrlRecord();
-        CreateUrlRecordCommandResult response = new CreateUrlRecordCommandResult();
-        
+        var result =
+            await _domainService.CreateUrlRecord(new CreateUrlRecordRequestDto(request.LongLink));
+
+        if (!result.IsSuccess)
+        {
+            return new CreateUrlRecordCommandResult();
+        }
+
+        var response = new CreateUrlRecordCommandResult()
+        {
+            IsExists = result.IsExists,
+            ShortLink = result.ShortLink
+        };
 
         return response;
     }
