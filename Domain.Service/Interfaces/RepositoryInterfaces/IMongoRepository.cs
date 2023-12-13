@@ -7,6 +7,8 @@ public interface IMongoRepository
     Task<List<UrlRecord>> GetAsync();
 
     Task<UrlRecord?> GetAsync(string id);
+    
+    Task<UrlRecord?> GetByLongLinkAsync(string longLink);
 
     Task CreateAsync(UrlRecord newUrlRecord);
 

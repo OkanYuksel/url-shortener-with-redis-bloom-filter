@@ -28,6 +28,9 @@ public class MongoRepository : IMongoRepository
 
     public async Task<UrlRecord?> GetAsync(string id) =>
         await _urlCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+    
+    public async Task<UrlRecord?> GetByLongLinkAsync(string longLink) =>
+        await _urlCollection.Find(x => x.LongLink == longLink).FirstOrDefaultAsync();
 
     public async Task CreateAsync(UrlRecord newUrlRecord) =>
         await _urlCollection.InsertOneAsync(newUrlRecord);

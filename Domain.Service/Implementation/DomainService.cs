@@ -16,12 +16,25 @@ public class DomainService : IDomainService
 
     public async Task<CreateUrlRecordResponseDto> CreateUrlRecord(CreateUrlRecordRequestDto requestDto)
     {
+        var urlRecord = await _mongoRepository.GetByLongLinkAsync(requestDto.LongLink);
 
-        await _mongoRepository.CreateAsync(new UrlRecord(requestDto.LongLink, "asd", DateTime.Now));
+        if (urlRecord != null)
+        {
+            return new CreateUrlRecordResponseDto()
+            {
+                ShortLink = urlRecord.ShortLink,
+                IsExists = true,
+                IsSuccess = true
+            };
+        }
+
+        urlRecord = new UrlRecord(requestDto.LongLink, "asd", DateTime.Now);
+            
+        await _mongoRepository.CreateAsync(urlRecord);
         
         return new CreateUrlRecordResponseDto()
         {
-            ShortLink = "asd",
+            ShortLink = urlRecord.ShortLink,
             IsExists = false,
             IsSuccess = true
         };
